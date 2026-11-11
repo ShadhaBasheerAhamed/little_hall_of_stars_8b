@@ -1,3 +1,28 @@
 [build]
   command = "npm run build"
   publish = "dist"
+
+[[redirects]]
+  from = "/student.html"
+  to = "/assets/student.html"
+  status = 200
+
+[[redirects]]
+  from = "/student.html/*"
+  to = "/assets/student.html/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/qr/*"
+  to = "/#/admin/qr"
+  status = 302
+
+[[redirects]]
+  from = "/admin"
+  to = "/#/admin"
+  status = 302
+
+[[redirects]]
+  from = "/admin/*"
+  to = "/#/admin/:splat"
+  status = 302

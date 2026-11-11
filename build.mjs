@@ -55,6 +55,11 @@ const options = {
 
 fs.mkdirSync(dist, { recursive: true });
 fs.copyFileSync(path.join(here, 'index.html'), path.join(dist, 'index.html'));
+// Copy student.html to dist root for direct URL access (e.g., /student.html?id=823)
+fs.copyFileSync(path.join(here, 'public', 'student.html'), path.join(dist, 'student.html'));
+// Copy QR codes ZIP and PDF to dist root for direct download
+fs.copyFileSync(path.join(here, 'public', 'qr-codes.zip'), path.join(dist, 'qr-codes.zip'));
+fs.copyFileSync(path.join(here, 'public', 'qr-codes.pdf'), path.join(dist, 'qr-codes.pdf'));
 // Static files (3D bouquet model etc.) are copied as-is into dist/assets/.
 if (fs.existsSync(path.join(here, 'public'))) fs.cpSync(path.join(here, 'public'), path.join(dist, 'assets'), { recursive: true });
 

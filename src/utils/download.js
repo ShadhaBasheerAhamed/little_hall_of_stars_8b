@@ -33,6 +33,30 @@ export function svgToPngBlob(svgEl, px = 1024) {
   });
 }
 
+export async function generateQRCodeBlob(value, px = 1024) {
+  const { encodeQR, qrToSvgPath } = await import('./qr.js');
+  const m = encodeQR(value);
+  const d = qrToSvgPath(m, 4);
+  const size = m.length + 8;
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('viewBox', '0 0 ' + size + ' ' + size);
+  svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+  svg.setAttribute('shape-rendering', 'crispEdges');
+  svg.innerHTML = '<rect width="' + size + '" height="' + size + '" fill="#ffffff"/><path d="' + d + '" fill="#14233d"/>';
+  return svgToPngBlob(svg, px);
+}
+
+export async function generateAllQRCodeBlobs(students, siteUrl, px = 1024) {
+  const clean = siteUrl.trim().split('#')[0];
+  const blobs = [];
+  for (const s of students) {
+    const link = clean + '#/?star=' + s.rollNumber;
+    const blob = await generateQRCodeBlob(link, px);
+    blobs.push({ student: s, blob });
+  }
+  return blobs;
+}
+
 export function slug(text) {
   return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 }
