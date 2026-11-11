@@ -1,0 +1,20 @@
+{
+  "name": "little-hall-of-stars",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "The Little Hall of Stars — a personalized digital appreciation experience for Class 8B.",
+  "scripts": {
+    "build": "node build.mjs",
+    "serve": "node build.mjs --serve",
+    "validate": "node scripts/validate-data.mjs"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-icons": "^5.0.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}
