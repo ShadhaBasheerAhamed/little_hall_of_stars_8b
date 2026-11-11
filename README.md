@@ -10,7 +10,7 @@
 - In Netlify's site environment variables, set `ADMIN_PASSCODE` before the first deploy to replace the default teacher passcode.
 - After deploy, open your live URL followed by `#/admin`, sign in, and go to **QR cards**. The live address is prefilled; print or download the cards so their QR codes open the deployed site.
 
-Students open the site (or scan their QR card) and type their 3-digit PIN. Teacher desk: `#/admin`.
+Students can open the site and type their 3-digit PIN, or scan their own QR card to open their world directly. QR links do not verify identity: anyone with a link (or who guesses a roll number) can open that student's world. Use them only for content you are comfortable sharing publicly. Teacher desk: `#/admin`.
 
 ## Editing content
 - Teacher desk → Edit student → Save. Edits live on the device you used.

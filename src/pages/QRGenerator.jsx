@@ -5,11 +5,15 @@ import QRCode from '../components/qr/QRCode.jsx';
 import Sparkle from '../components/common/Sparkle.jsx';
 import { downloadBlob, slug, svgToPngBlob } from '../utils/download.js';
 
-const URL_KEY = 'lhos.siteurl.v1';
-const PIN_KEY = 'lhos.printpin.v1';
+const URL_KEY = 'lhos.siteurl.v2';
+const PIN_KEY = 'lhos.printpin.v2';
+const LIVE_SITE_URL = 'https://littlehallofstarsmy8b.netlify.app/';
+
+const isLocal = (u) => /^(https?:\/\/)?(localhost|127\.|0\.0\.0\.0|192\.168\.|10\.)/i.test(u.trim()) || /^file:/i.test(u.trim());
 
 function defaultSiteUrl() {
-  return window.location.href.split('#')[0];
+  const current = window.location.href.split('#')[0];
+  return isLocal(current) ? LIVE_SITE_URL : current;
 }
 
 function readStored(key, fallback) {
@@ -29,11 +33,9 @@ function writeStored(key, val) {
   }
 }
 
-const isLocal = (u) => /^(https?:\/\/)?(localhost|127\.|0\.0\.0\.0|192\.168\.|10\.)/i.test(u.trim()) || /^file:/i.test(u.trim());
-
 export default function QRGenerator({ students }) {
   const [site, setSite] = useState(() => readStored(URL_KEY, defaultSiteUrl()));
-  const [showPin, setShowPin] = useState(() => readStored(PIN_KEY, '1') === '1');
+  const [showPin, setShowPin] = useState(() => readStored(PIN_KEY, '0') === '1');
   const [busy, setBusy] = useState('');
   const refs = useRef({});
 
@@ -42,7 +44,7 @@ export default function QRGenerator({ students }) {
 
   const clean = site.trim();
   const valid = /^https?:\/\/[^\s]+$/i.test(clean);
-  // The QR opens the login page (never a student's page) — the PIN is still needed.
+  // Scanning a student's QR opens their experience directly.
   const link = (s) => `${clean.split('#')[0]}#/?star=${s.rollNumber}`;
 
   const downloadOne = async (s) => {
@@ -63,7 +65,8 @@ export default function QRGenerator({ students }) {
       <main className="container admin-main">
         <div className="no-print">
           <h1 className="admin-title">QR cards</h1>
-          <p className="muted">One card per student. Scanning opens the login page — each student still needs their own PIN.</p>
+          <p className="muted">One card per student. Scanning opens that student's world directly; no PIN is needed.</p>
+          <p className="admin-warn" role="note">Anyone with a QR link can open its student's world, and roll numbers are easy to guess. Use this only for content you are comfortable sharing publicly.</p>
 
           <label className="field">
             <span className="field-label">Your website address (where the site is published)</span>
@@ -81,7 +84,7 @@ export default function QRGenerator({ students }) {
           )}
           <label className="check">
             <input type="checkbox" checked={showPin} onChange={(e) => setShowPin(e.target.checked)} />
-            <span>Print each student's PIN on their card</span>
+            <span>Also print each student's PIN on their card (optional; QR scan does not need it)</span>
           </label>
           <p>
             <button type="button" className="btn btn-primary" disabled={!valid} onClick={() => window.print()}>

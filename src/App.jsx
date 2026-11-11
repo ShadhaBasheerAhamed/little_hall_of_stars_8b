@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Redirect, navigate, useRoute } from './router.jsx';
-import { getSession, logout } from './auth.js';
+import { getSession, loginStudent, logout } from './auth.js';
 import { useStudents } from './hooks/useContent.js';
 import LoginPage from './pages/LoginPage.jsx';
 import StudentHome from './pages/StudentHome.jsx';
@@ -11,6 +11,14 @@ import QRGenerator from './pages/QRGenerator.jsx';
 import StudentPreview from './pages/StudentPreview.jsx';
 import GiftPage from './pages/GiftPage.jsx';
 import GiftAdmin from './pages/GiftAdmin.jsx';
+
+function QRStudentAccess({ student }) {
+  useEffect(() => {
+    loginStudent(student.rollNumber);
+    navigate('/me', { replace: true });
+  }, [student.rollNumber]);
+  return null;
+}
 
 export default function App() {
   const { path, query } = useRoute();
@@ -45,6 +53,12 @@ export default function App() {
       return <StudentPreview student={s} rest={rest === '/' ? '' : rest} />;
     }
     return <Redirect to="/admin/dashboard" />;
+  }
+
+  // QR cards carry a roll number and open that student's experience without a PIN.
+  if (path === '/' && query.star) {
+    const student = students.find((s) => String(s.rollNumber) === query.star);
+    if (student) return <QRStudentAccess student={student} />;
   }
 
   // ---------- Student area ----------
