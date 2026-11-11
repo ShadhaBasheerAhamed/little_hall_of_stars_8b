@@ -1,4 +1,4 @@
-import { LuLayoutList, LuQrCode, LuLogOut, LuStar, LuFlower2 } from 'react-icons/lu';
+import { LuLayoutList, LuQrCode, LuLogOut, LuStar, LuFlower2, LuGift } from 'react-icons/lu';
 import { Link, navigate } from '../../router.jsx';
 import { logout } from '../../auth.js';
 
@@ -15,6 +15,9 @@ export default function AdminBar({ current }) {
           </Link>
           <Link to="/admin/qr" className={current === 'qr' ? 'is-current' : ''} aria-current={current === 'qr' ? 'page' : undefined}>
             <LuQrCode aria-hidden="true" /> <span>QR cards</span>
+          </Link>
+          <Link to="/admin/gift-cards" className={current === 'gift-cards' ? 'is-current' : ''} aria-current={current === 'gift-cards' ? 'page' : undefined}>
+            <LuGift aria-hidden="true" /> <span>Gift Cards</span>
           </Link>
           <Link to="/admin/gifts" className={current === 'gifts' ? 'is-current' : ''} aria-current={current === 'gifts' ? 'page' : undefined}>
             <LuFlower2 aria-hidden="true" /> <span>AR gifts</span>

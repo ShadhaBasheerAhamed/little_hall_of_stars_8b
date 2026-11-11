@@ -485,3 +485,70 @@ ul.admin-errors { padding: 12px 16px 12px 30px; list-style: disc; }
   .gcard-svg { box-shadow: none; border-radius: 0; width: 98mm; }
   .gcard-svg, .gcard-svg * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
+
+/* Gift Card Generator - Beautiful personalised cards */
+.gift-admin { background: #14233d; min-height: 100vh; }
+.gift-admin .admin-main { max-width: 1100px; }
+.gift-sheet { display: grid; gap: 24px; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); margin-top: 1.4rem; }
+
+.gift-card { position: relative; width: 380px; height: 540px; margin: 0 auto; background: #fffdf6; border: 2px solid #f4d6dc; border-radius: 20px; box-shadow: 0 8px 32px rgba(20, 35, 61, 0.12), 0 0 0 1px rgba(244, 214, 220, 0.5); overflow: hidden; }
+.gift-card::before { content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px; border-radius: 22px; background: linear-gradient(135deg, rgba(244, 214, 220, 0.3), rgba(210, 220, 245, 0.3), rgba(240, 230, 250, 0.3)); z-index: -1; opacity: 0.6; }
+@media print { .gift-card::before { display: none; } }
+
+.gift-card-inner { display: flex; flex-direction: column; height: 100%; padding: 28px 24px 24px; justify-content: space-between; }
+
+.gift-brand { display: flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--font-display); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.08em; color: var(--azure-deep); margin-bottom: 4px; }
+.gift-brand-star { width: 16px; height: 16px; color: var(--gold); }
+
+.gift-class { text-align: center; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin: 0 0 16px; }
+
+.gift-subtitle { text-align: center; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 12px; font-weight: 500; }
+
+.gift-name { font-family: var(--font-hand); font-weight: 700; font-size: clamp(2rem, 5vw, 2.6rem); color: var(--rose); line-height: 1.15; margin: 0 0 8px; overflow-wrap: anywhere; text-align: center; }
+
+.gift-roll { text-align: center; font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; color: var(--azure-deep); margin: 0 0 20px; }
+
+.gift-qr-wrapper { display: flex; justify-content: center; margin: 0 auto 16px; }
+.gift-qr { width: 140px !important; height: 140px !important; max-width: none !important; display: block; filter: drop-shadow(0 4px 12px rgba(20, 35, 61, 0.15)); }
+
+.gift-scan { text-align: center; font-family: var(--font-display); font-style: italic; font-size: 0.85rem; color: var(--azure); margin: 0 0 12px; font-weight: 600; }
+.gift-scan-star { width: 14px; height: 14px; color: var(--gold); vertical-align: middle; margin-left: 4px; animation: spin-slow 14s linear infinite; }
+
+.gift-quote { text-align: center; font-family: var(--font-display); font-style: italic; font-size: 0.95rem; color: var(--ink); margin: 0 0 20px; padding: 0 16px; line-height: 1.5; border-left: 3px solid var(--gold-soft); padding-left: 16px; background: linear-gradient(90deg, transparent, rgba(230, 200, 120, 0.08)); border-radius: 0 8px 8px 0; }
+
+.gift-footer { text-align: center; padding-top: 12px; border-top: 1px dashed var(--gold-soft); }
+.gift-love { font-family: var(--font-hand); font-weight: 700; font-size: 1.25rem; color: var(--rose); margin: 0 0 4px; }
+.gift-role { font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); margin: 0; font-weight: 500; }
+
+.gift-card-tools { display: flex; gap: 8px; justify-content: center; margin-top: 16px; padding-top: 16px; border-top: 1px dashed var(--line); }
+.gift-card-tools .btn { min-width: 120px; }
+
+@media (min-width: 900px) {
+  .gift-sheet { grid-template-columns: repeat(2, 380px); justify-content: center; }
+}
+@media (max-width: 800px) {
+  .gift-sheet { grid-template-columns: 1fr; }
+  .gift-card { width: 100%; max-width: 380px; }
+}
+
+@media print {
+  .gift-admin { background: #fff !important; min-height: 0 !important; }
+  .gift-admin .admin-main { padding: 0 !important; max-width: none !important; margin: 0; }
+  .no-print { display: none !important; }
+  .gift-sheet { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 8mm !important; margin: 0 !important; padding: 8mm !important; width: 100% !important; }
+  .gift-card { width: 98mm !important; height: 139mm !important; margin: 0 !important; border: 1.5px solid #e8d0d6 !important; box-shadow: none !important; break-inside: avoid !important; page-break-inside: avoid !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  .gift-card::before { display: none !important; }
+  .gift-card-inner { padding: 7mm 6mm 6mm !important; }
+  .gift-brand { font-size: 7pt !important; margin-bottom: 2mm !important; }
+  .gift-class { font-size: 5.5pt !important; margin-bottom: 4mm !important; }
+  .gift-subtitle { font-size: 5.5pt !important; margin-bottom: 3mm !important; }
+  .gift-name { font-size: 16pt !important; margin-bottom: 2mm !important; }
+  .gift-roll { font-size: 9pt !important; margin-bottom: 5mm !important; }
+  .gift-qr { width: 30mm !important; height: 30mm !important; margin-bottom: 3mm !important; }
+  .gift-scan { font-size: 7pt !important; margin-bottom: 3mm !important; }
+  .gift-quote { font-size: 7.5pt !important; padding-left: 3mm !important; border-left-width: 1.5pt !important; margin-bottom: 4mm !important; }
+  .gift-footer { padding-top: 2mm !important; }
+  .gift-love { font-size: 10pt !important; margin-bottom: 1mm !important; }
+  .gift-role { font-size: 5.5pt !important; }
+  .gift-card-tools { display: none !important; }
+}

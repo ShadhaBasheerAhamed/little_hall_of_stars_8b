@@ -11,6 +11,7 @@ import QRGenerator from './pages/QRGenerator.jsx';
 import StudentPreview from './pages/StudentPreview.jsx';
 import GiftPage from './pages/GiftPage.jsx';
 import GiftAdmin from './pages/GiftAdmin.jsx';
+import GiftCardGenerator from './pages/GiftCardGenerator.jsx';
 
 function QRStudentAccess({ student }) {
   useEffect(() => {
@@ -42,6 +43,7 @@ export default function App() {
     if (sub === 'dashboard') return <AdminDashboard students={students} />;
     if (sub === 'qr') return <QRGenerator students={students} />;
     if (sub === 'gifts') return <GiftAdmin />;
+    if (sub === 'gift-cards') return <GiftCardGenerator students={students} />;
     if (sub === 'student') {
       const s = students.find((x) => String(x.rollNumber) === parts[2]);
       return s ? <AdminEditor student={s} /> : <Redirect to="/admin/dashboard" />;
